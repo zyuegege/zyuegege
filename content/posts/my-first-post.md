@@ -2,8 +2,8 @@
 date = '2025-03-13T06:33:29Z'
 draft = false
 title = 'My First Post'
-tags = ['markdown']
-categories = ['markdown']
+tag = 'markdown'
+category = 'markdown'
 +++
 
 ## Introduction
