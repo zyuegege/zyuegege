@@ -6,12 +6,12 @@ theme = 'smigle'
 [menu]
 
 main = [
-    {identifier='home', name='主页', url='/', weight='1'},
-    {identifier='about', name='关于', url='/about/', weight='2'},
-    {identifier='posts', name='文章', url='/posts/', weight='3'},
-    {identifier='categories', name='类别', url='/categories/', weight='4'},
-    {identifier='tags', name='标签', url='/tags/', weight='5'},
-    {identifier='rss', name='订阅', url='/index.xml', weight='6'}
+    {identifier='home', name='主页', url='/zyuegege/', weight='1'},
+    {identifier='about', name='关于', url='/zyuegege/about/', weight='2'},
+    {identifier='posts', name='文章', url='/zyuegege/posts/', weight='3'},
+    {identifier='categories', name='类别', url='/zyuegege/categories/', weight='4'},
+    {identifier='tags', name='标签', url='/zyuegege/tags/', weight='5'},
+    {identifier='rss', name='订阅', url='/zyuegege/index.xml', weight='6'}
 ]
 
 [params]
