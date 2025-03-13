@@ -1,4 +1,4 @@
-baseURL = 'http://admin.zyuegege.com:1313'
+baseURL = 'https://zyuegege.github.io/zyuegege/'
 languageCode = 'zh-hans'
 title = 'My New Hugo Site'
 theme = 'ananke'
