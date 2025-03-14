@@ -9,7 +9,7 @@
   />
   
     
-      <title>My First Post | Alvin的个人记录</title>
+      <title>第一篇笔记：Hugo &amp; Gitbub Pages 搭建个人静态笔记站点 | Alvin的个人记录</title>
     
   
   <link rel="stylesheet" href="/zyuegege/css/reset.css"/>
@@ -76,7 +76,7 @@
         
   <main>
     <article>
-      <h1 class="title">My First Post</h1>
+      <h1 class="title">第一篇笔记：Hugo &amp; Gitbub Pages 搭建个人静态笔记站点</h1>
       
       
 
@@ -88,21 +88,90 @@
     
       <a href="/zyuegege/categories/markdown">markdown</a>
   </strong>
-  <span> • 14 words</span>
+  <span> • 186 words</span>
   <span> • 1 minute read</span>
   
   
     <div>
       <span>Tags:</span>
       
-        <a href="/zyuegege/tags/markdown">markdown</a>
+        <a href="/zyuegege/tags/markdown">markdown</a>, 
+        <a href="/zyuegege/tags/hugo">Hugo</a>
     </div>
   
 </div>
 
-      <div class="content"><h2 id="introduction">Introduction</h2>
-<p>This is <strong>bold</strong> text, and this is <em>emphasized</em> text.</p>
-<p>Visit the <a href="https://gohugo.io">Hugo</a> website!</p>
+      <div class="content"><h2 id="介绍">介绍</h2>
+<p>用 Hugo 写文章放到 github 进行托管并用 github pages 进行在线展示。</p>
+<h2 id="配置-github-actionspages">配置 GitHub Actions/Pages</h2>
+<h3 id="github-actions-配置">GitHub Actions 配置</h3>
+<p>在文档管理的仓库里面增加一个文件 <code>.github/workflows/deploy.yml</code>，内容如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">Deploy Hugo Site to GitHub Pages</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">on</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">push</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">branches</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">jobs</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">deploy</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Checkout code</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v3</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">submodules</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Set up Hugo</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          wget https://github.com/gohugoio/hugo/releases/download/v0.145.0/hugo_extended_withdeploy_0.145.0_Linux-64bit.tar.gz
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          tar -xvzf hugo_extended_withdeploy_0.145.0_Linux-64bit.tar.gz
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          sudo mv hugo /usr/bin/</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build site</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: <span style="color:#ae81ff">hugo</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Deploy to GitHub Pages</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">peaceiris/actions-gh-pages@v3</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">github_token</span>: <span style="color:#ae81ff">${{ secrets.GITHUB_TOKEN }}</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">publish_dir</span>: <span style="color:#ae81ff">./public</span>
+</span></span></code></pre></div><p>在 github Actions 的配置，需要设置一下对应的代码推送权限，主要是为了实现当笔记文件有更新的时候使用 github actions 流水线自动部署最新的 github pages 静态页面的内容。</p>
+<ol>
+<li>找到笔记代码仓库的 <strong>Settings</strong> &gt; <strong>Actions</strong> &gt; <strong>General</strong> &gt; <strong>Workflow permissions</strong></li>
+<li>选择 <strong>Read and write permissions</strong> 选择项</li>
+<li>并选择 <strong>Allow GitHub Actions to create and approve pull requests</strong></li>
+</ol>
+<h3 id="github-pages-配置">GitHub Pages 配置</h3>
+<ol>
+<li>找到笔记代码仓库的 <strong>Setting</strong> &gt; <strong>Pages</strong> &gt; <strong>Build and deployment</strong></li>
+<li>将 <strong>Build and deployment</strong> 选项下的 <strong>Source</strong> 选择为 <strong>GitHub Actions</strong></li>
+</ol>
+<h2 id="hugo-使用">Hugo 使用</h2>
+<p>请参考官方文档的 <a href="https://gohugo.io/getting-started/quick-start/">quick start</a></p>
+<p>以下罗列几个常用的命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 1. 创建一个 hugo 的站点</span>
+</span></span><span style="display:flex;"><span>hugo new site quickstart
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. 下载一个主题：使用 git</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. 启动本地服务预览站点</span>
+</span></span><span style="display:flex;"><span>hugo server
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4. 添加一个文档页面</span>
+</span></span><span style="display:flex;"><span>hugo new content content/posts/my-first-post.md
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 5. 发布站点</span>
+</span></span><span style="display:flex;"><span>hugo
+</span></span></code></pre></div><h3 id="站点配置">站点配置</h3>
+<p>参考链接 <a href="https://gohugo.io/getting-started/quick-start/#configure-the-site">Configure the site</a></p>
+<h2 id="参考链接">参考链接</h2>
+<ol>
+<li><a href="https://gohugo.io/">Hugo 官方主页</a></li>
+<li><a href="https://smigle-hugo-theme.netlify.app/">smigle 主题 demo</a></li>
+<li><a href="https://themes.gohugo.io/themes/smigle-hugo-theme/">smigle 主题页</a></li>
+<li><a href="https://toml.io/cn/v1.0.0">toml</a>: hugo 使用的配置方式</li>
+</ol>
 </div>
     </article>
   </main>
