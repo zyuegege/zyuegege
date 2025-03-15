@@ -1,20 +1,61 @@
 baseURL = 'https://zyuegege.github.io/zyuegege/'
-languageCode = 'zh-hans'
+languageCode = 'zh-Hans'
 title = 'Alvin的个人记录'
 theme = 'smigle'
 
 summaryLength = 1
 
-[menu]
+defaultContentLanguage = 'zh-hans'
+defaultContentLanguageInSubdir = false
+disableDefaultLanguageRedirect = false
+disableLanguages = []
 
-main = [
-    {identifier='home', name='主页', url='/', weight='1'},
-    {identifier='about', name='关于', url='/about/', weight='2'},
-    {identifier='posts', name='文章', url='/posts/', weight='3'},
-    {identifier='categories', name='类别', url='/categories/', weight='4'},
-    {identifier='tags', name='标签', url='/tags/', weight='5'},
-    {identifier='rss', name='订阅', url='/index.xml', weight='6'}
-]
+[languages]
+[languages.zh-hans]
+disabled = false
+languageCode = 'zh-hans'
+languageDirection = 'ltr'
+languageName = '简体中文'
+title = 'Alvin的个人主页'
+weight = 0
+
+[menu]
+[[menu.main]]
+identifier = 'home'
+name = '主页'
+url = '/'
+weight = '1'
+
+[[menu.main]]
+identifier = 'about'
+name = '关于'
+url = '/about/'
+weight = '2'
+
+[[menu.main]]
+identifier = 'posts'
+name = '文章'
+url = '/posts/'
+weight = '3'
+
+[[menu.main]]
+identifier = 'categories'
+name = '类别'
+url = '/categories/'
+weight = '4'
+
+[[menu.main]]
+identifier = 'tags'
+name = '标签'
+url = '/tags/'
+weight = '5'
+
+[[menu.main]]
+identifier = 'rss'
+name = '订阅'
+url = '/index.xml'
+weight = '6'
+
 
 [params]
 abbrDateFmt = "Jan 2"
