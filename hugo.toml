@@ -3,6 +3,8 @@ languageCode = 'zh-hans'
 title = 'Alvin的个人记录'
 theme = 'smigle'
 
+summaryLength = 1
+
 [menu]
 
 main = [
