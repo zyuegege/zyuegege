@@ -1,7 +1,9 @@
 +++
 date = '2025-03-14T12:22:57Z'
-draft = true
+draft = false
 title = 'GStreamer 框架笔记'
+tags = ['GStreamer', '多媒体框架', 'Pipeline', '数据流']
+categories = ['多媒体框架']
 +++
 
 GStreamer 是一个强大的多媒体处理框架，用于构建媒体处理组件图（Pipeline），从简单的音视频播放到复杂的音视频混合、非线编处理等。它支持多种媒体格式和流媒体协议，开发者可以通过编写插件来扩展其功能。
